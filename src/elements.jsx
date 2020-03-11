@@ -36,6 +36,10 @@ class Elements extends React.Component {
     }
     console.log(field);
     //notice that the child is turning true
+    //method to apply this hide/show to reflect in UI
+    ///right now its not handled by this cpomponentbut it just receives
+    //may be flatten the main json and add "hidden" manually here
+    //and return a final json with input field values
   }
   init() {}
   render() {

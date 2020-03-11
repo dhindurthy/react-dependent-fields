@@ -22,12 +22,13 @@ class View extends React.Component {
         {
           type: "text",
           label: "Parent",
-          children: [
-            {
-              type: "text",
-              label: "Daughter"
-            }
-          ]
+          key: "parent",
+          children: []
+        },
+        {
+          type: "text",
+          label: "Daughter",
+          parent: "parent"
         },
         {
           type: "select",
