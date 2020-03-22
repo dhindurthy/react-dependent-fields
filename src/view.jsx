@@ -62,18 +62,53 @@ class View extends React.Component {
         },
         {
           type: "checkbox",
-          label: "Alive"
+          label: "Alive",
+          key: "alive",
+          checked: false,
+          children: [
+            {
+              type: "text",
+              label: "Living thing",
+              parent: "alive",
+              hidden: true
+            }
+          ]
         }
       ]
     };
+    this.inputChange = this.inputChange.bind(this);
   }
-
+  inputChange(field, index, event) {
+    console.log(field.type);
+    let value = event.target.value;
+    let fields = this.state.fields;
+    if (field.children) {
+      for (let i = 0; i < field.options.length; i++) {
+        if (field.options[i].value === value) {
+          for (let a = 0; a < field.children.length; a++) {
+            if (value === field.children[a].parent) {
+              field.children[a].hidden = false;
+            } else {
+              field.children[a].hidden = true;
+            }
+          }
+        }
+      }
+    }
+    fields[index] = field;
+    this.setState(state => ({
+      fields: fields
+    }));
+  }
   render() {
     return (
       <section>
         {this.state.fields.map((field, index) => (
           <section key={index}>
-            <Elements field={field} />
+            <Elements
+              field={field}
+              changeSelect={this.inputChange.bind(this, field, index)}
+            />
             {field.children &&
               field.children.map((child, index) => (
                 <section
